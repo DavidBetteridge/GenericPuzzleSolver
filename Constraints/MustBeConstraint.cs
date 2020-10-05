@@ -11,9 +11,9 @@ namespace GenericPuzzleSolver
             _rule = rule;
         }
 
-        public bool ValueNotValid(int possibleValue, Cell[,] board)
+        public bool ValueIsValid(int possibleValue, Cell[,] board)
         {
-            return !_rule(possibleValue);
+            return _rule(possibleValue);
         }
     }
 }

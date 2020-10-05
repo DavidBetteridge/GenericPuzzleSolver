@@ -17,10 +17,10 @@ namespace GenericPuzzleSolver
         public int OtherColumn { get; }
         public int OtherRow { get; }
 
-        public bool ValueNotValid(int possibleValue, Cell[,] board)
+        public bool ValueIsValid(int possibleValue, Cell[,] board)
         {
             var largestValue = board[OtherColumn, OtherRow].PossibleValues.Max();
-            return possibleValue >= largestValue;
+            return possibleValue < largestValue;
         }
     }
 }

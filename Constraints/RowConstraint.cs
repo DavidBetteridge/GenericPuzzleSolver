@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace GenericPuzzleSolver
 {
-    class ColumnConstraint : IConstraint
+    class RowConstraint : IConstraint
     {
-        public ColumnConstraint(int columnNumber, int rowNumber)
+        public RowConstraint(int columnNumber, int rowNumber)
         {
             RowNumber = rowNumber;
             ColumnNumber = columnNumber;
@@ -14,27 +14,27 @@ namespace GenericPuzzleSolver
         public int RowNumber { get; }
         public int ColumnNumber { get; }
 
-        public bool ValueNotValid(int possibleValue, Cell[,] board)
+        public bool ValueIsValid(int possibleValue, Cell[,] board)
         {
             var allPossibleValues = new List<string>();
-            for (int row = 0; row < board.GetLength(1); row++)
+            for (int column = 0; column < board.GetLength(0); column++)
             {
-                if (row != RowNumber)
+                if (column != ColumnNumber)
                 {
-                    var possibleValues = board[ColumnNumber, row].PossibleValues;
+                    var possibleValues = board[column, RowNumber].PossibleValues;
                     if (possibleValues.Count == 1 && possibleValues.Single() == possibleValue)
-                        return true;
+                        return false;
 
                     if (possibleValues.Count == 2 && possibleValues.Contains(possibleValue))
                         allPossibleValues.Add(string.Join("", possibleValues));
                 }
             }
 
-            // Are there two pairs in this column which contain this value?
+            // Are there two pairs in this row which contain this value?
             if (allPossibleValues.Distinct().Count() != allPossibleValues.Count())
-                return true;
+                return false;
 
-            return false;
+            return true;
         }
     }
 }

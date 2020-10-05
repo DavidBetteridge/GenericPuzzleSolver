@@ -2,6 +2,6 @@
 {
     interface IConstraint
     {
-        bool ValueNotValid(int possibleValue, Cell[,] board);
+        bool ValueIsValid(int possibleValue, Cell[,] board);
     }
 }

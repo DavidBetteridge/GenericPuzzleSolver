@@ -17,10 +17,10 @@ namespace GenericPuzzleSolver
         public int OtherColumn { get; }
         public int OtherRow { get; }
 
-        public bool ValueNotValid(int possibleValue, Cell[,] board)
+        public bool ValueIsValid(int possibleValue, Cell[,] board)
         {
             var smallestValue = board[OtherColumn, OtherRow].PossibleValues.Min();
-            return possibleValue <= smallestValue;
+            return possibleValue > smallestValue;
         }
     }
 }
